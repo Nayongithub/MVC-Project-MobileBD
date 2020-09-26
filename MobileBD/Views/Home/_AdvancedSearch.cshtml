@@ -1,0 +1,15 @@
+﻿@model IEnumerable<MobileBD.Models.Product>
+
+
+@using (@Html.BeginForm("AdvancedSearch", "Product", FormMethod.Post, new
+{
+    @class = "form-horizontal",
+    enctype = "multipart/form-data"
+}))
+{
+
+    <div class="input-group">
+        <button class="input-group-text bg-white rounded" type="submit" title="Advanced Search"><i class="fa fa-server" aria-hidden="true"></i></button>
+    </div>
+
+}

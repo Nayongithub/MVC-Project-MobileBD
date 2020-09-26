@@ -1,0 +1,67 @@
+﻿@model MobileBD.Models.User
+@{
+    ViewBag.Title = "Login";
+}
+
+<body onload="LoginModal()">
+    <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                
+                <div class="modal-body d-flex justify-content-center">
+
+
+                    @using (@Html.BeginForm("Login", "Account", FormMethod.Post, new
+                    {
+                        @class = "form-horizontal",
+                        enctype = "multipart/form-data"
+                    }))
+                    {
+                        <div class="form-group">
+                            <h2 style="color:#FDA66D">Login</h2>
+                        </div>
+
+                        if (TempData["msg"] != null)
+                        {
+                            <p class="text-danger">@TempData["msg"]</p>
+
+                        }
+
+                        <div class="form-group">
+                            <label for="Name" class="font-weight-bold">User Name :</label>
+                            <div>
+                                @Html.TextBoxFor(x => x.Name, "", new { @class = "form-control", @placeholder = "User Name" })
+                                @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Password" class="font-weight-bold">Password :</label>
+                            <div>
+                                @Html.TextBoxFor(x => x.Password, "", new { @class = "form-control", @placeholder = "Password", @type = "Password" })
+                                @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Login" class=" btn" style="background-color:#001131;color:#FDA66D;width:100%" />
+
+                        </div>
+                        @Html.ActionLink("Cancel", "index", "Product", null, new { @class = "btn btn-secondary", @style = "width:100%" })
+                        <br />
+                      
+                    }
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</body>
+
+@section scripts{
+    <script type="text/javascript">
+        function LoginModal() {
+            $("#delModal").modal("show")
+        }
+    </script>
+}

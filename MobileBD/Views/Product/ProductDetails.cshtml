@@ -1,0 +1,31 @@
+﻿@model MobileBD.Models.Product
+
+@{
+    ViewBag.Title = "ProductDetails";
+}
+<div>
+    <h2><b>@Model.MobileFullName</b></h2>
+    <p class="text-muted"><b>Posted :</b> @Model.PostDate.ToString()</p>
+    <div class="col-md-6 offset-3 d-flex justify-content-center" style="padding:15px;background-color:#FEEFE5">
+        @if (Model.Picture == null)
+        {
+            <img class="img-rounded" src="~/Images/No-img.png" alt="~/Images/No-img.png" style="height:300px" />
+        }
+        else
+        {
+            <img class="img-rounded" src="@Url.Content(Model.Picture)" alt="~/Images/No-img.png" style="width:200px;height:300px" />
+        }
+
+    </div>
+    <br />
+    <h4 style="color:#FDA66D">TK. @Model.Price</h4>
+    <div><b>Number : </b><label class="text-muted"> @Model.Number</label></div>
+    <div><b>Address : </b><label class="text-muted"> @Model.Address</label></div>
+    <label><b>Description :</b></label>
+    <div style="border:1px solid #585858; padding:20px">
+        <p class="text-muted">@Model.Description</p>
+    </div>
+</div>
+
+
+

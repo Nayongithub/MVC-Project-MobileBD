@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileBD", "MobileBD\MobileBD.csproj", "{DEA4CC55-F61A-4F0E-91A4-1020C2CC58E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DEA4CC55-F61A-4F0E-91A4-1020C2CC58E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEA4CC55-F61A-4F0E-91A4-1020C2CC58E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEA4CC55-F61A-4F0E-91A4-1020C2CC58E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEA4CC55-F61A-4F0E-91A4-1020C2CC58E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC286BA7-2B5F-4D74-961C-C252F0FDA42A}
+	EndGlobalSection
+EndGlobal

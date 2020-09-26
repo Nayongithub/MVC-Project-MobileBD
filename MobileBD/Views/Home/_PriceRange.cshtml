@@ -1,0 +1,26 @@
+﻿@model IEnumerable<MobileBD.Models.Product>
+
+@using (@Html.BeginForm("PriceRange", "Product", FormMethod.Get, new
+{
+    @class = "form-horizontal",
+    enctype = "multipart/form-data"
+}))
+{
+
+        <div   >
+            <table>
+                <thead  style="background-color: #001131">
+                    <tr class="text-center" style="color: #FDA66D">
+                         <th class="rounded" colspan="3"><h5>Filter By Price</h5></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>  @Html.TextBox("maxPrice", null, new { @class = "form-control", @placeholder = "Maximum", @style = "max-width:100%" })</td>
+                        <td>@Html.TextBox("minPrice", null, new { @class = "form-control", @placeholder = "Minimum", @style = "max-width:100%" })</td>
+                        <td><button class="btn" type="submit" style="background-color: #F0EDEC;width:100%"><i class="fa fa-search"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+}

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<MobileBD.Models.Customer>
+@{
+    ViewBag.Title = "Stores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section styles{
+    <style>
+        .row .nav-link:hover {
+        }
+    </style>
+}
+
+<div class="row d-flex justify-content-center">
+    @foreach (var item in Model)
+    {
+        <a class="nav-link" href="@Url.Action("StoreProducts","Customer",new { id=item.StoreId})">
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm" style="width: 10rem;height:20em; background-color:#FDA66D">
+                    <img class="card-img-top" src="~/CustomerImage/MobileBDLogo.jpg" alt="Card image cap" />
+                    <div class="card-body">
+                        <p class="text-white" style="background-color:#001131"><b>Store</b></p>
+                        <h5 class="card-title" style="color:black">@item.StoreName</h5>
+                        <p class="card-text" style="color:black">@item.StoreAddress</p>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </a>
+    }`
+</div>
+<div class="row d-flex justify-content-center">
+
+    @{
+        double TotalPages = ViewBag.TotalPages;
+        if (TotalPages > 1)
+        {
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    @if (ViewBag.PageNumber == 1)
+                    {
+                        <li class="page-item disabled">@Html.ActionLink("<<", "Stores", new { PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })</li>
+                    }
+                    else
+                    {
+                        <li class="page-item">@Html.ActionLink("<<", "Stores", new { PageNumber = ViewBag.PageNumber - 1 }, new { @class = "page-link" })</li>
+                    }
+
+                    @for (int i = 1; i <= TotalPages; i++)
+                    {
+                        if (i == ViewBag.PageNumber)
+                        {
+                            <li class="page-item active">@Html.ActionLink(i.ToString(), "Stores", new { PageNumber = i }, new { @class = "page-link" })</li>
+                        }
+                        else
+                        {
+                            <li class="page-item">@Html.ActionLink(i.ToString(), "Stores", new { PageNumber = i }, new { @class = "page-link" })</li>
+                        }
+                    }
+                    @if (ViewBag.PageNumber == TotalPages)
+                    {
+                        <li class="page-item disabled">@Html.ActionLink(">>", "Stores", new { PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })</li>
+                    }
+                    else
+                    {
+                        <li class="page-item">@Html.ActionLink(">>", "Stores", new { PageNumber = ViewBag.PageNumber + 1 }, new { @class = "page-link" })</li>
+                    }
+                </ul>
+            </nav>
+        }
+    }
+</div>
+
+

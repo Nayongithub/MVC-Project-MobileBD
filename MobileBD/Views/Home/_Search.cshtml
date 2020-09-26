@@ -1,0 +1,17 @@
+﻿@model IEnumerable<MobileBD.Models.Product>
+
+
+@using (@Html.BeginForm("Index", "Product", FormMethod.Post, new
+{
+    @class = "form-horizontal",
+    enctype = "multipart/form-data"
+}))
+{
+
+    <div class="input-group">
+        <input type="text" class="form-control col-md-12 rounded" name="searchTxt" placeholder="Search" />&nbsp;
+        @*@Html.TextBox("searchTxt",null,new { @class= "form-control", @placeholder = "Search" })*@
+        <button class="input-group-text bg-white rounded-circle" type="submit"><i class="fa fa-search"></i></button>
+    </div>
+
+}

@@ -1,0 +1,43 @@
+﻿@model MobileBD.Models.User
+@{
+    ViewBag.Title = "Delete";
+}
+
+<body onload="DeleteModal()">
+    <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="color:#FDA66D;background-color:#001131">
+                    <h5 class="modal-title" id="exampleModalLabel">Deleting this User ?</h5>
+
+                </div>
+                <div class="modal-body text-center">
+                    <p><h4>Name : @Model.Name</h4></p>
+                    <p><h4>Mobile : @Model.Password</h4></p>
+                </div>
+                <div class="modal-footer" style="background-color:#001131">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.HiddenFor(x => x.UserID)
+                        @Html.ActionLink("Cancel", "UserTable", "Account", null, new { @class = "btn btn-secondary" })
+                        <button type="submit" class="btn btn-danger">&nbsp;&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+@section scripts{
+    <script type="text/javascript">
+        function DeleteModal() {
+            $("#delModal").modal("show")
+        }
+    </script>
+}
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+﻿body {
+}
+#user-Profile-Image #removeImage {
+    position: absolute;
+    top: 0;
+    right: 40px;
+    cursor: pointer;
+    transform: scaleY(0);
+    transition: 0.3s;
+    transform-origin: top
+}
+
+#user-Profile-Image:hover #removeImage {
+    transform: scaleY(1);
+}

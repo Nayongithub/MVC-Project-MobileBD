@@ -1,0 +1,197 @@
+﻿@model MobileBD.Models.ViewModel.CustomerViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    <link href="~/Style Sheets/Image.css" rel="stylesheet" />
+    <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.4/themes/cupertino/jquery-ui.css" rel="stylesheet" />
+}
+
+
+<h2 class="text-center" style="color:#FDA66D">Store Registration Form</h2>
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-primary d-flex justify-content-center" role="alert">
+        <h1>@ViewBag.Message</h1>
+    </div>
+
+}
+@using (@Html.BeginForm("Create", "Customer", FormMethod.Post, new
+{
+    @class = "form-horizontal",
+    enctype = "multipart/form-data"
+}))
+{
+    @Html.Hidden("StoreId", Guid.NewGuid().ToString(), new { @class = "form-control" })
+
+    <fieldset class="border p-2">
+        <legend class="w-auto">Your Info</legend>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="FullName" class="font-weight-bold">Full Name :</label>
+                <div>
+                    @Html.TextBoxFor(x => x.FullName, "", new { @class = "form-control", @placeholder = "Full Name" })
+                    @Html.ValidationMessageFor(x => x.FullName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="Gender" class="font-weight-bold">Gender :</label>
+                <div>
+                    <label class="">
+                        @Html.RadioButtonFor(x => x.Gender, "Male", new { @name = "Gander" })
+                        Male
+                    </label>
+                    <label>
+                        @Html.RadioButtonFor(x => x.Gender, "Female", new { @name = "Gander" })
+                        Female
+                    </label>
+                    <div>
+                        @Html.ValidationMessageFor(x => x.Gender, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="StoreName" class="font-weight-bold">Store Name :</label>
+                <div>
+                    @Html.TextBoxFor(x => x.StoreName, "", new { @class = "form-control", @placeholder = "Store Name" })
+                    @Html.ValidationMessageFor(x => x.StoreName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="Number" class="font-weight-bold">Number :</label>
+                <div>
+                    @Html.TextBoxFor(x => x.Number, "", new { @class = "form-control", @placeholder = "Number" })
+                    @Html.ValidationMessageFor(x => x.Number, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="Email" class="font-weight-bold">Email :</label>
+                <div>
+                    @Html.TextBoxFor(x => x.Email, "", new { @class = "form-control", @placeholder = "Email" })
+                    @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="Membership" class="font-weight-bold">Membership Date:</label>
+                <div>
+                    @Html.TextBoxFor(x => x.Membership, "mm/dd/yyyy", new { @class = "form-control datetimepicker" })
+                    @Html.ValidationMessageFor(x => x.Membership, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="OurLocationID" class="font-weight-bold">Location :</label>
+                <div>
+                    @Html.DropDownListFor(x => x.OurLocationID, ViewBag.Division as SelectList, "Your Division", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.OurLocationID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="StoreAddress" class="font-weight-bold">Store Address  :</label>
+                <div>
+                    @Html.TextBoxFor(x => x.StoreAddress, "", new { @class = "form-control", @placeholder = "Address", })
+                    @Html.ValidationMessageFor(x => x.StoreAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group col-md-4 offset-4">
+
+            <div class="rounded" id="user-Profile-Image">
+
+                <div class="d-flex justify-content-center">
+                    <button id="removeImage" type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div>
+                        <img src="~/CustomerImage/No-img.png" class="img-thumbnail" id="UserImage" style="height:200px;width:200px; border:1px solid #000000" />
+
+                    </div>
+                </div>
+
+            </div>
+            <input type="file" class="d-none" id="InputFile" name="UserImageFile" accept="image/*" />
+
+
+            <div class="text-center" style="background-color:#FDA66D">
+                <p type="button" class="" id="btnUploadPhoto">Upload Image</p>
+
+            </div>
+
+        </div>
+        <div class="form-group ">
+            <p class="font-weight-light text-center">@Html.ValidationMessageFor(x => x.UserImageFile, "", new { @class = "text-danger" })</p>
+            <p class="font-weight-light text-center" id="ImageDes">Please Upload Only Image file and it must be less than 4 mb</p>
+        </div>
+        <br />
+        <div class="form-group col-md-4 offset-4">
+            <input type="submit" value="Submit" class=" btn" style="background-color:#001131;color:#FDA66D;width:100%" />
+        </div>
+        <br />
+    </fieldset>
+    
+
+}
+@section scripts{
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#Membership").datepicker();
+        });
+    </script>
+
+    <script>
+        //Open browse file window
+        $("#btnUploadPhoto").click(function () {
+            UploadImageEvent()
+        });
+
+        function UploadImageEvent() {
+            $("#InputFile").trigger("click")
+        };
+
+        //Select and upload Image
+        $("#InputFile").change(function () {
+            var File = this.files;
+            if (File && File[0]) {
+                var reader = new FileReader();
+                reader.readAsDataURL(File[0]);
+
+                reader.onload = function (x) {
+                    $("#UserImage").attr("src", x.target.result)
+
+
+                };
+            };
+
+        });
+
+
+
+
+        $("#removeImage").click(function () {
+            $("#InputFile").val(null);
+            $("#UserImage").attr("src", "/CustomerImage/No-img.png")
+        })
+    </script>
+
+
+}
+
+

@@ -1,0 +1,247 @@
+﻿@model MobileBD.Models.ViewModel.ProductViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+@section styles{
+    <link href="~/Style Sheets/Image.css" rel="stylesheet" />
+}
+
+<h2 class="text-center" style="color:#FDA66D">Your Post Infomation</h2>
+
+
+@using (@Html.BeginForm("Create", "Product", FormMethod.Post, new
+{
+    @class = "form-horizontal",
+    enctype = "multipart/form-data"
+}))
+{
+    @Html.Hidden("PostDate", DateTime.Now.ToString(), new { @class = "form-control" })
+    if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("1") | User.IsInRole("2") | User.IsInRole("3"))
+        {
+            <fieldset class="border p-2">
+                <legend class="w-auto">Store</legend>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="StoreId" class="font-weight-bold">Store Id :</label>
+                        <div>
+                            @Html.TextBoxFor(x => x.StoreId, "", new { @class = "form-control", @placeholder = "Store Id" })
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="ForSlider" class="font-weight-bold"></label>
+                        <div>
+                            <label class="font-weight-bold">
+                                @Html.CheckBoxFor(x => x.ForSlider, false)
+                                For Slider
+                            </label>
+                            <p class="text-primary">[Upload 720px * 280px image for slider.] </p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    }
+    <fieldset class="border p-2">
+        <legend class="w-auto">Your Info</legend>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="FullName" class="font-weight-bold">Full Name :</label>
+                <div>
+                    @Html.TextBoxFor(x => x.FullName, "", new { @class = "form-control", @placeholder = "Full Name" })
+                    @Html.ValidationMessageFor(x => x.FullName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="Gender" class="font-weight-bold">Gender :</label>
+                <div>
+                    <label class="">
+                        @Html.RadioButtonFor(x => x.Gender, "Male", new { @name = "Gender" })
+                        Male
+                    </label>
+                    <label>
+                        @Html.RadioButtonFor(x => x.Gender, "Female", new { @name = "Gender" })
+                        Female
+                    </label>
+                    <div>
+                        @Html.ValidationMessageFor(x => x.Gender, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="Number" class="font-weight-bold">Number :</label>
+                <div>
+                    @Html.TextBoxFor(x => x.Number, "", new { @class = "form-control", @placeholder = "Number" })
+                    @Html.ValidationMessageFor(x => x.Number, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="Email" class="font-weight-bold">Email :</label>
+                <div>
+                    @Html.TextBoxFor(x => x.Email, "", new { @class = "form-control", @placeholder = "Email" })
+                    @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="Address" class="font-weight-bold">Address  :</label>
+            <div>
+                @Html.TextBoxFor(x => x.Address, "", new { @class = "form-control", @placeholder = "Address", style = "max-width:85%" })
+                @Html.ValidationMessageFor(x => x.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="border p-2">
+        <legend class="w-auto">Product Info</legend>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="MobileFullName" class="font-weight-bold">Mobile Full Name  :</label>
+                <div>
+                    @Html.TextBoxFor(x => x.MobileFullName, "", new { @class = "form-control", @placeholder = "Mobile Full Name" })
+                    @Html.ValidationMessageFor(x => x.MobileFullName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="Condition" class="font-weight-bold">Condition  :</label>
+                <div>
+                    @Html.EnumDropDownListFor(x => x.Condition, "Select One", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Condition, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="MobileBrandID" class="font-weight-bold">Brand  :</label>
+                <div>
+                    @Html.DropDownListFor(x => x.MobileBrandID, ViewBag.Brand as SelectList, "Select One", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.MobileBrandID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="OurLocationID" class="font-weight-bold">Location :</label>
+                <div>
+                    @Html.DropDownListFor(x => x.OurLocationID, ViewBag.Division as SelectList, "Your Division", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.OurLocationID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="Price" class="font-weight-bold">Price  :</label>
+                <div>
+                    @Html.TextBoxFor(x => x.Price, "", new { @class = "form-control", @placeholder = "Enter Price" })
+                    @Html.ValidationMessageFor(x => x.Price, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="font-weight-bold">Interested :</label>
+                <div>
+                    <label class="">
+                        @Html.CheckBoxFor(x => x.Sell, false)
+                        Sell
+                    </label>
+
+                    <label class="">
+                        @Html.CheckBoxFor(x => x.Exchange, false)
+                        Exchange
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="Description" class="font-weight-bold">Description  :</label>
+            <div>
+                @Html.TextAreaFor(x => x.Description, new { @class = "form-control", @placeholder = "Description", rows = "10", style = "max-width:85%" })
+                @Html.ValidationMessageFor(x => x.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-4 offset-4">
+
+            <div class="rounded" id="user-Profile-Image">
+
+                <div class="d-flex justify-content-center">
+                    <button id="removeImage" type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div>
+                        <img src="~/Images/No-img.png" class="img-thumbnail" id="UserImage" style="height:200px;width:200px; border:1px solid #000000" />
+
+                    </div>
+                </div>
+
+            </div>
+            <input type="file" class="d-none" id="InputFile" name="UserImageFile" accept="image/*" />
+            <div class="text-center" style="background-color:#FDA66D">
+                <p type="button" class="" id="btnUploadPhoto">Upload Image</p>
+
+            </div>
+
+        </div>
+        <div class="form-group ">
+            <p class="font-weight-light text-center" id="ImageDes">Please Upload Only Image(JPG/JPEG/PNG) file and it must be less than 4 mb</p>
+        </div>
+        <br />
+        <div class="form-group col-md-4 offset-4">
+            <input type="submit" value="Submit" class=" btn" style="background-color:#001131;color:#FDA66D;width:100%" />
+        </div>
+        <br />
+    </fieldset>
+}
+@section scripts{
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+
+
+        //Open browse file window
+        $("#btnUploadPhoto").click(function () {
+            UploadImageEvent()
+        });
+
+        function UploadImageEvent() {
+            $("#InputFile").trigger("click")
+        };
+
+        //Select and upload Image
+        $("#InputFile").change(function () {
+            var File = this.files;
+            if (File && File[0]) {
+                var reader = new FileReader();
+                reader.readAsDataURL(File[0]);
+
+                reader.onload = function (x) {
+                    $("#UserImage").attr("src", x.target.result)
+
+                    
+
+                };
+            };
+
+        });
+
+        $("#removeImage").click(function () {
+            $("#InputFile").val(null);
+            $("#UserImage").attr("src", "/Images/No-img.png")
+
+
+        })
+    </script>
+}
+
+
+
+

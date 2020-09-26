@@ -1,0 +1,46 @@
+﻿@model MobileBD.Models.User
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 class="text-center" style="color:#FDA66D">SignUp</h2>
+
+
+@using (@Html.BeginForm("Edit", "Account", FormMethod.Post, new
+{
+    @class = "form-horizontal",
+    enctype = "multipart/form-data"
+}))
+{
+    @Html.HiddenFor(x => x.UserID);
+    <div class="form-group">
+        <label for="Name" class="font-weight-bold">Name :</label>
+        <div>
+            @Html.TextBoxFor(x => x.Name, "", new { @class = "form-control", @placeholder = "Name" })
+        </div>
+    </div>
+    <div class="form-group ">
+        <label for="Password" class="font-weight-bold">Pasword :</label>
+        <div>
+            @Html.TextBoxFor(x => x.Password, "", new { @class = "form-control", @placeholder = "Password", @type = "Password" })
+        </div>
+    </div>
+    <div class="form-group ">
+        <label for="RoleID" class="font-weight-bold">RoleID :</label>
+        <div>
+            @Html.TextBoxFor(x => x.RoleID, "", new { @class = "form-control", @placeholder = "RoleID" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group col-md-4">
+        <input type="submit" value="Update" class=" btn" style="background-color:#001131;color:#FDA66D;width:100%" />
+    </div>
+}
+
+
+
+
+
+
+
+

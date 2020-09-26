@@ -1,0 +1,89 @@
+﻿
+@model IEnumerable<MobileBD.Models.Customer>
+@{
+    ViewBag.Title = "CustomerTable";
+}
+
+<h2>CustomerTable</h2>
+
+
+<table class="table table-bordered table-hover">
+    <thead style="background-color:#001131;color:#FDA66D">
+        <tr class="text-center">
+            <th>Full Name</th>
+            <th>Number</th>
+            <th>Email</th>
+            <th>Address</th>
+
+            <th>Picture</th>
+            <th>&nbsp;&nbsp;&nbsp;&nbsp;Action&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FullName</td>
+                <td>@item.Number</td>
+                <td>@item.Email</td>
+                <td>@item.StoreAddress</td>
+
+                <td>
+                    @if (item.Picture == null)
+                    {
+                        <img class="img-rounded" src="~/Images/No-img.png" alt="~/Images/No-img.png" style="height:80px" />
+                    }
+                    else
+                    {
+                        <img class="img-rounded" src="@Url.Content(item.Picture)" alt="~/Images/No-img.png" style="height:80px" />
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Customer", new { id = item.CustomerId }, htmlAttributes: new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink("Delete", "Delete", "Customer", new { id = item.CustomerId }, htmlAttributes: new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="row d-flex justify-content-center">
+
+    @{
+        double TotalPages = ViewBag.TotalPages;
+        if (TotalPages > 1)
+        {
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    @if (ViewBag.PageNumber == 1)
+                    {
+                        <li class="page-item disabled">@Html.ActionLink("<<", "CustomerTable", new { PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })</li>
+                    }
+                    else
+                    {
+                        <li class="page-item">@Html.ActionLink("<<", "CustomerTable", new { PageNumber = ViewBag.PageNumber - 1 }, new { @class = "page-link" })</li>
+                    }
+
+                    @for (int i = 1; i <= TotalPages; i++)
+                    {
+                        if (i == ViewBag.PageNumber)
+                        {
+                            <li class="page-item active">@Html.ActionLink(i.ToString(), "CustomerTable", new { PageNumber = i }, new { @class = "page-link" })</li>
+                        }
+                        else
+                        {
+                            <li class="page-item">@Html.ActionLink(i.ToString(), "CustomerTable", new { PageNumber = i }, new { @class = "page-link" })</li>
+                        }
+                    }
+                    @if (ViewBag.PageNumber == TotalPages)
+                    {
+                        <li class="page-item disabled">@Html.ActionLink(">>", "CustomerTable", new { PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })</li>
+                    }
+                    else
+                    {
+                        <li class="page-item">@Html.ActionLink(">>", "CustomerTable", new { PageNumber = ViewBag.PageNumber + 1 }, new { @class = "page-link" })</li>
+                    }
+                </ul>
+            </nav>
+        }
+    }
+</div>

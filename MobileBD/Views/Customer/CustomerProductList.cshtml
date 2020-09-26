@@ -1,0 +1,107 @@
+﻿@model IEnumerable<MobileBD.Models.Product>
+@{
+    ViewBag.Title = "CustomerProductList";
+}
+
+<h2 class="text-center">Product List</h2>
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-primary" role="alert"><h3>@TempData["msg"]</h3></div>
+}
+
+@using (@Html.BeginForm("CustomerProductList", "Customer", FormMethod.Get, new
+{
+    @class = "form-horizontal",
+    enctype = "multipart/form-data"
+}))
+{
+
+    <div class="input-group d-flex justify-content-center col-md-6 offset-3">
+
+        @Html.TextBox("storeId", null, new { @class = "form-control", @placeholder = "storeId", @style = "max-width:100%" })&nbsp;
+        <button class="input-group-text bg-white" type="submit"><i class="fa fa-list-alt"></i></button>
+
+    </div>
+    <small class="form-text text-center text-muted">Insert Your Store ID For Your Product List</small>
+}
+<br />
+<table class="table table-bordered table-hover">
+    <thead style="background-color:#001131;color:#FDA66D">
+        <tr class="text-center">
+            <th>Full Name</th>
+            <th>Mobile Name</th>
+            <th>Slider</th>
+            <th>Picture</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FullName</td>
+                <td>@item.MobileFullName</td>
+                <td>@item.ForSlider</td>
+                <td>
+                    @if (item.Picture == null)
+                    {
+                        <img class="img-rounded" src="~/Images/No-img.png" alt="~/Images/No-img.png" style="width: 80px; height: 80px" />
+                    }
+                    else
+                    {
+                        <img class="img-rounded" src="@Url.Content(item.Picture)" alt="~/Images/No-img.png" style="width:80px;height:80px" />
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Product", new { id = item.ProductID }, htmlAttributes: new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink("Delete", "Delete", "Product", new { id = item.ProductID }, htmlAttributes: new { @class = "btn btn-danger btn-sm" })
+                </td>
+
+            </tr>
+
+        }
+    </tbody>
+
+</table>
+<div class="row d-flex justify-content-center">
+
+        @{
+            double TotalPages = ViewBag.TotalPages;
+            if (TotalPages > 1)
+            {
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        @if (ViewBag.PageNumber == 1)
+                        {
+                            <li class="page-item disabled">@Html.ActionLink("<<", "CustomerProductList", new { storeId= ViewBag.storeId, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })</li>
+                        }
+                        else
+                        {
+                            <li class="page-item">@Html.ActionLink("<<", "CustomerProductList", new { storeId = ViewBag.storeId, PageNumber = ViewBag.PageNumber - 1 }, new { @class = "page-link" })</li>
+                        }
+
+                        @for (int i = 1; i <= TotalPages; i++)
+                        {
+                            if (i == ViewBag.PageNumber)
+                            {
+                                <li class="page-item active">@Html.ActionLink(i.ToString(), "CustomerProductList", new { storeId = ViewBag.storeId, PageNumber = i }, new { @class = "page-link" })</li>
+                            }
+                            else
+                            {
+                                <li class="page-item">@Html.ActionLink(i.ToString(), "CustomerProductList", new { storeId = ViewBag.storeId, PageNumber = i }, new { @class = "page-link" })</li>
+                            }
+                        }
+                        @if (ViewBag.PageNumber == TotalPages)
+                        {
+                            <li class="page-item disabled">@Html.ActionLink(">>", "CustomerProductList", new { storeId = ViewBag.storeId, PageNumber = ViewBag.PageNumber }, new { @class = "page-link" })</li>
+                        }
+                        else
+                        {
+                            <li class="page-item">@Html.ActionLink(">>", "CustomerProductList", new { storeId = ViewBag.storeId, PageNumber = ViewBag.PageNumber + 1 }, new { @class = "page-link" })</li>
+                        }
+                    </ul>
+                </nav>
+            }
+        }
+    </div>
+

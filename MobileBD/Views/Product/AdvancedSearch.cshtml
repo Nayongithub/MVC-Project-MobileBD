@@ -1,0 +1,82 @@
+﻿@model MobileBD.Models.Product
+@{
+    ViewBag.Title = "AdvancedSearch";
+}
+
+
+<body onload="Modal()">
+    <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body d-flex justify-content-center">
+                    @using (@Html.BeginForm("AdvancedSearchProducts", "Product", FormMethod.Get, new
+                    {
+                        @class = "form-horizontal",
+                        enctype = "multipart/form-data"
+                    }))
+                    {
+                        <div class="form-group">
+                            <h2 style="color:#FDA66D">Advanced Search</h2>
+                        </div>
+
+                        <div class="form-group">
+                            <table>
+                                <thead style="background-color: #001131">
+                                    <tr class="text-center" style="color: #FDA66D">
+                                        <th class="rounded" colspan="3"><h5>Filter By Price</h5></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>  @Html.TextBox("maxPrice", null, new { @class = "form-control", @placeholder = "Maximum", @style = "max-width:100%" })</td>
+                                        <td>@Html.TextBox("minPrice", null, new { @class = "form-control", @placeholder = "Minimum", @style = "max-width:100%" })</td>
+                                        <td>
+                                            @Html.ValidationMessageFor(x => x.Price, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <label for="MobileBrandID" class="font-weight-bold">Brand  :</label>
+                            <div>
+                                @Html.DropDownListFor(x => x.MobileBrandID, ViewBag.Brand as SelectList, "Select One", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="OurLocationID" class="font-weight-bold">Location :</label>
+                            <div>
+                                @Html.DropDownListFor(x => x.OurLocationID, ViewBag.Division as SelectList, "Your Division", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <button class="btn" type="submit" style="background-color: #001131;width:100%"><i class="fa fa-search" style="color:white"></i></button>
+                        </div>
+                        <div class="form-group">
+                            @Html.ActionLink("Cancel", "index", "Product", null, new { @class = "btn btn-secondary", @style = "width:100%" })
+
+                        </div>
+
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+@section scripts{
+    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+
+    <script type="text/javascript">
+        function Modal() {
+            $("#Modal").modal("show")
+        }
+    </script>
+}
